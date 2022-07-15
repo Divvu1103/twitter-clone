@@ -5,18 +5,25 @@ import Image from 'next/image';
 import Sidebar from '../components/Sidebar';
 import Feed from '../components/Feed';
 import { fetchTweets } from '../utils/fetchTweets'
+import { Toaster } from 'react-hot-toast'
 import Widgets from '../components/Widgets';
-
-const Home: NextPage = () => {
+import { Tweet } from '../typings';
+import { useSession } from 'next-auth/react'
+interface Props {
+  tweets:Tweet[]
+}
+const Home = ({tweets}:Props) => {
+// console.log(tweets)
   return (
     <div className="lg:max-w-6xl mx-auto max-h-screen overflow-hidden">
       <Head>
         <title>Twitter</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Toaster />
       <main className='grid grid-cols-9'>
         <Sidebar />
-        <Feed />
+        <Feed  tweets={tweets}/>
         <Widgets />
 
       </main>
